@@ -1,38 +1,48 @@
 # Taming Noise-Induced Prototype Degradation for Privacy-Preserving Personalized Federated Fine-Tuning (CVPR 2026)
 
-The implementation of paper Taming Noise-Induced Prototype Degradation for Privacy-Preserving Personalized Federated Fine-Tuning (CVPR 2026).
-![VPDR framework](VPDR-framework.png)
-This repository targets federated prototype-based personalization (ProtoPFL) and implements VPDR as a client plug-in that can be integrated into existing ProtoPFL frameworks (e.g., FedProto), improving the privacy–utility trade-off over the classic equal-noise baseline (IGPP). The default configuration focuses on domain or label skew with ResNet / ViT backbones, but you can extend the framework to other datasets and model families.
+Official implementation of **Taming Noise-Induced Prototype Degradation for Privacy-Preserving Personalized Federated Fine-Tuning (CVPR 2026)**.
 
-## 1. Background & Method
+<p align="center">
+  <img src="./VPDR-framework.png" alt="VPDR framework" width="900">
+</p>
 
-- **Limitations of IGPP (equal noise)**  
-  1. Feature dimensions contribute unevenly; applying the same noise to every axis over-perturbs the most discriminative ones and degrades prototype quality.  
-  2. DP requires per-sample clipping, yet choosing a fixed \(\ell_2\) threshold is delicate: a large bound inflates the noise scale \(\Delta\), while a small bound severely distorts features.
+This repository focuses on **federated prototype-based personalization (ProtoPFL)** and implements **VPDR** as a client-side plug-in that can be incorporated into existing ProtoPFL frameworks (e.g., FedProto). Compared with the classical equal-noise baseline (**IGPP**), VPDR provides a better privacy–utility trade-off by preserving more informative prototype dimensions during perturbation. The default implementation is designed for domain-skew or label-skew settings with **ResNet** and **ViT** backbones, while the framework can also be extended to other datasets and model families.
 
-- **VPDR plug-in (Variance-adaptive Prototype Perturbation + Distillation-guided Clipping Regularization)**  
-  - **VPP** assigns noise adaptively across dimensions while keeping the same LDP guarantee, minimizing information loss.  
-  - **DCR** introduces distillation-guided soft clipping during local personalization to stabilize per-sample norms.  
-  - VPDR integrates with FedProto via flags such as `--noise_add vpp` and `--use_dcr`.
+---
 
-High-level workflow:
-1. Each client applies VPP and DP perturbation to upload privatized prototypes.  
-2. The server aggregates them into global prototypes.  
-3. Clients run DCR-enhanced personalization on their private data.
+### VPDR Plug-in
 
-## 2. Requirements
+VPDR consists of two key components:
+
+- **Variance-adaptive Prototype Perturbation (VPP):**  
+  Allocates perturbation noise adaptively across feature dimensions under the same local differential privacy guarantee, thereby reducing unnecessary information loss.
+
+- **Distillation-guided Clipping Regularization (DCR):**  
+  Introduces a distillation-guided soft clipping mechanism during local personalization to stabilize per-sample feature norms and improve robustness.
+
+**VPDR can be integrated into a ProtoPFL pipeline through simple configuration flags such as `--noise_add vpp` and `--use_dcr`.**
+
+### High-Level Workflow
+
+1. Each client applies **VPP** and differential privacy perturbation to upload privatized prototypes.
+2. The server aggregates local prototypes into global prototypes.
+3. Each client performs **DCR-enhanced personalization** on its private local data.
+
+--- 
+
+## Requirements
 
 - Python 3.8+
 - PyTorch ≥ 1.10 (GPU recommended)
 - torchvision
 - scikit-learn (FINCH / KMeans clustering)
 
-## 3. Data & Model Preparation
+## Data & Model Preparation
 
 - **Data**: the code loads CIFAR-10 from `data/`. Please download it manually (or rely on the script’s auto-download) and place it there.  
 - **Pretrained models**: store the required ResNet/ViT checkpoints under `model/` (e.g., `vit-small/`, `vit-tiny/`). Any compatible weights are acceptable as long as the directory layout matches the code.
 
-## 4. Example Run
+## Example Run
 
 ```bash
 python main.py \
@@ -49,7 +59,7 @@ python main.py \
 
 Training logs, checkpoints, and metrics are stored under `logs/{exp_name}/...`, with summaries in `metrics.json`.
 
-## 5. Directory Layout
+## Directory Layout
 
 ```
 ├── main.py               # training entry point
