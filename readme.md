@@ -83,4 +83,17 @@ Training logs, checkpoints, and metrics are stored under `logs/{exp_name}/...`, 
 │   └── ...
 └── README.md
 ```
- 
+
+--- 
+
+## Citation
+
+If you find our work useful in your research, please consider citing:
+
+```bibtex
+@inproceedings{wang2026vpdr,
+  title={Taming Noise-Induced Prototype Degradation for Privacy-Preserving Personalized Federated Fine-Tuning},
+  author={Yuhua Wang, Qinnan Zhang, Xiaodong Li, Huan Zhang, Yifan Sun, Wangjie Qiu, Hainan Zhang, Yongxin Tong and Zhiming Zheng},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  year={2026}
+}
