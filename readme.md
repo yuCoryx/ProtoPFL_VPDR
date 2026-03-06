@@ -37,10 +37,14 @@ VPDR consists of two key components:
 - torchvision
 - scikit-learn (FINCH / KMeans clustering)
 
+--- 
+
 ## Data & Model Preparation
 
 - **Data**: Please manually download the datasets (or use the script’s automatic download option, if available) and place them under the `data/`.  
 - **Pretrained models**: store the required ResNet/ViT checkpoints under `model/` (e.g., `vit-small/`, `vit-tiny/`). Any compatible weights are acceptable as long as the directory layout matches the code.
+
+--- 
 
 ## Example Run
 
@@ -58,6 +62,8 @@ python main.py \
 ```
 
 Training logs, checkpoints, and metrics are stored under `logs/{exp_name}/...`, with summaries in `metrics.json`.
+
+--- 
 
 ## Directory Layout
 
