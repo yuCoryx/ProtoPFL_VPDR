@@ -1,7 +1,7 @@
 # Taming Noise-Induced Prototype Degradation for Privacy-Preserving Personalized Federated Fine-Tuning (CVPR 2026)
 
 The implementation of paper Taming Noise-Induced Prototype Degradation for Privacy-Preserving Personalized Federated Fine-Tuning (CVPR 2026).
-
+![VPDR framework](VPDR-framework.png)
 This repository targets federated prototype-based personalization (ProtoPFL) and implements VPDR as a client plug-in that can be integrated into existing ProtoPFL frameworks (e.g., FedProto), improving the privacy–utility trade-off over the classic equal-noise baseline (IGPP). The default configuration focuses on domain or label skew with ResNet / ViT backbones, but you can extend the framework to other datasets and model families.
 
 ## 1. Background & Method
