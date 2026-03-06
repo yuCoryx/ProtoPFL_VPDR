@@ -39,7 +39,7 @@ VPDR consists of two key components:
 
 ## Data & Model Preparation
 
-- **Data**: the code loads CIFAR-10 from `data/`. Please download it manually (or rely on the script’s auto-download) and place it there.  
+- **Data**: Please manually download the datasets (or use the script’s automatic download option, if available) and place them under the `data/`.  
 - **Pretrained models**: store the required ResNet/ViT checkpoints under `model/` (e.g., `vit-small/`, `vit-tiny/`). Any compatible weights are acceptable as long as the directory layout matches the code.
 
 ## Example Run
